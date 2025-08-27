@@ -77,7 +77,8 @@ function Form({ inputFields }: FormProps) {
     [formValues]
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (isFormValid(formValues)) {
       const registrationData = {
         name: formValues.name,
@@ -91,7 +92,7 @@ function Form({ inputFields }: FormProps) {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={(event) => handleSubmit(event)}>
       {inputFields.map((fieldConfig) => (
         <InputField
           fieldConfig={fieldConfig}
