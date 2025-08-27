@@ -90,7 +90,7 @@ function Form({ inputFields }: FormProps) {
   };
 
   return (
-    <form className="form" action="">
+    <form className="form" onSubmit={handleSubmit}>
       {inputFields.map((fieldConfig) => (
         <InputField
           fieldConfig={fieldConfig}
@@ -103,9 +103,7 @@ function Form({ inputFields }: FormProps) {
           onBlur={handleOnBlurField}
         />
       ))}
-      <SubmitButton disabled={!isFormValid(formValues)} onClick={handleSubmit}>
-        Sign up
-      </SubmitButton>
+      <SubmitButton disabled={!isFormValid(formValues)}>Sign up</SubmitButton>
     </form>
   );
 }
