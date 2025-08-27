@@ -1,12 +1,20 @@
-import type { IFieldConfig } from "../types";
+import type { IFieldConfig, IFieldValidation, IFormValues } from "../types";
 
 interface InputFieldProps {
   fieldConfig: IFieldConfig;
   value: string;
+  validation: IFieldValidation;
   onChange: (value: string) => void;
+  onBlur: (fieldName: keyof IFormValues) => void;
 }
 
-function InputField({ fieldConfig, value, onChange }: InputFieldProps) {
+function InputField({
+  fieldConfig,
+  value,
+  validation,
+  onChange,
+  onBlur,
+}: InputFieldProps) {
   const {
     label,
     type,
@@ -15,24 +23,39 @@ function InputField({ fieldConfig, value, onChange }: InputFieldProps) {
     minLength,
     maxLength,
     pattern,
+    required,
   } = fieldConfig;
-  console.log("value", value);
+
+  const { isValid, message: validationMessage, isDirty } = validation;
+
   return (
-    <label>
-      {label}
-      <input
-        type={type}
-        placeholder={placeholder}
-        name={label}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        autoComplete={autocomplete}
-        minLength={minLength}
-        maxLength={maxLength}
-        pattern={pattern}
-        required
-      />
-    </label>
+    <>
+      <label>
+        {label}
+        <input
+          type={type}
+          placeholder={placeholder}
+          name={label}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={(e) => onBlur(e.target.value as keyof IFormValues)}
+          autoComplete={autocomplete}
+          minLength={minLength}
+          maxLength={maxLength}
+          pattern={pattern}
+          required={required}
+        />
+        {(!isValid || isDirty) && (
+          <span className="validation error-icon">✗</span>
+        )}
+      </label>
+
+      {!isValid && validationMessage && (
+        <div>
+          <span className="validation message">{validationMessage}</span>
+        </div>
+      )}
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 export interface IFieldConfig {
   label: string;
+  name: string;
   type: "text" | "email";
   placeholder: string;
   autocomplete: string;
@@ -7,6 +8,7 @@ export interface IFieldConfig {
   maxLength: number;
   pattern: string;
   patternMessage: string;
+  required: boolean;
 }
 
 export interface IFormValues {
@@ -15,4 +17,10 @@ export interface IFormValues {
   email: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface IFieldValidation {
+  isValid: boolean;
+  message: string;
+  isDirty: boolean;
 }
