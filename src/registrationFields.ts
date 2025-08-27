@@ -9,7 +9,7 @@ export const registrationFields: IFieldConfig[] = [
     autocomplete: "name",
     minLength: 1,
     maxLength: 50,
-    pattern: "^[a-zA-Z0-9_-]+$",
+    pattern: "^[\\u0041-\\u005A\\u0061-\\u007A\\u00C0-\\u00FF0-9 ._-]+$",
     patternMessage:
       "Name can only contain letters, numbers, dashes (-), and underscores (_)",
     required: true,
@@ -22,7 +22,7 @@ export const registrationFields: IFieldConfig[] = [
     autocomplete: "username",
     minLength: 1,
     maxLength: 50,
-    pattern: "^[a-zA-Z0-9_-]+$",
+    pattern: "^[\\u0041-\\u005A\\u0061-\\u007A\\u00C0-\\u00FF0-9\\s\\._-]+$",
     patternMessage:
       "Username can only contain letters, numbers, dashes (-), and underscores (_)",
     required: true,
@@ -48,9 +48,10 @@ export const registrationFields: IFieldConfig[] = [
     autocomplete: "new-password",
     minLength: 8,
     maxLength: 120,
-    pattern: "^[a-zA-Z0-9!@#$%^&*()_+\\-=]+$",
+    pattern:
+      "^[\\u0041-\\u005A\\u0061-\\u007A\\u00C0-\\u00FF0-9!@#$%^&*()_+=-]+$",
     patternMessage:
-      "Use only letters, numbers, and safe special characters (!@#$%^&*()_+-=[]{}|;:,.<>?~`)",
+      "Use only letters, numbers, and special characters: !@#$%^&*()_+-=",
     required: true,
   },
   {
@@ -61,9 +62,10 @@ export const registrationFields: IFieldConfig[] = [
     autocomplete: "new-password",
     minLength: 1,
     maxLength: 120,
-    pattern: "^[a-zA-Z0-9!@#$%^&*()_+\\-=]+$",
+    pattern:
+      "^[\\u0041-\\u005A\\u0061-\\u007A\\u00C0-\\u00FF0-9!@#$%^&*()_+=-]+$",
     patternMessage:
-      "Use only letters, numbers, and safe special characters (!@#$%^&*()_+-=[]{}|;:,.<>?~`)",
+      "Use only letters, numbers, and special characters: !@#$%^&*()_+-=",
     required: true,
   },
 ];

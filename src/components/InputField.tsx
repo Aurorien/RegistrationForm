@@ -23,7 +23,6 @@ function InputField({
     autocomplete,
     minLength,
     maxLength,
-    pattern,
     required,
   } = fieldConfig;
 
@@ -48,7 +47,6 @@ function InputField({
           autoComplete={autocomplete}
           minLength={minLength}
           maxLength={maxLength}
-          pattern={pattern}
           required={required}
         />
         <div className="validation message-ctn">

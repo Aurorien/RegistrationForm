@@ -23,44 +23,44 @@ export const validateField = (
 ) => {
   const { label, minLength, maxLength, pattern, patternMessage, required } =
     fieldConfig;
+  const fieldValue = value || "";
+
   let isValid = true;
   let message = "";
 
-  if (!isDirty && value && value.length === 0) {
+  if (!isDirty && fieldValue.length === 0) {
     return { isValid: true, message: "", isDirty };
   }
 
-  if (required && value && value.length === 0) {
+  if (required && fieldValue.trim().length === 0) {
     isValid = false;
     message = `${fieldConfig.label} is required`;
+    return { isValid, message, isDirty };
   }
 
-  if (value && value.length > 0) {
-    if (minLength && value && value.length < minLength) {
+  if (fieldValue.length > 0) {
+    if (minLength && fieldValue.length < minLength) {
       isValid = false;
       message = `${fieldConfig.label} must be at least ${minLength} characters`;
     }
 
-    if (maxLength && value && value.length > maxLength) {
+    if (maxLength && fieldValue.length > maxLength) {
       isValid = false;
       message = `${fieldConfig.label} must be no more than ${maxLength} characters`;
     }
 
     if (pattern) {
-      const regex = new RegExp(pattern);
-      if (!regex.test(value)) {
+      const regex = new RegExp(pattern, "u");
+      if (!regex.test(fieldValue)) {
         isValid = false;
         message = `Invalid ${fieldConfig.label.toLowerCase()}. ${patternMessage}`;
       }
     }
 
     if (label === "Confirm password") {
-      if (value !== formValues.password) {
+      if (fieldValue !== formValues.password) {
         isValid = false;
         message = "Passwords do not match";
-      } else {
-        isValid = true;
-        message = "";
       }
     }
   }
@@ -71,6 +71,12 @@ export const validateField = (
 export const isFormValid = (formValues: IFormValues) => {
   const allFieldsValid = registrationFields.every((fieldConfig) => {
     const value = formValues[fieldConfig.label as keyof IFormValues];
+
+    if (fieldConfig.required && value && value.trim().length === 0) {
+      console.log(`${fieldConfig.label} is empty and required`);
+      return false;
+    }
+
     const validation = validateField(fieldConfig, value, formValues, true);
     return validation.isValid;
   });
