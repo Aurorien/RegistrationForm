@@ -1,14 +1,18 @@
 import { registrationFields } from "./registrationFields";
-import type { IFieldConfig, IFormValues } from "./types";
+import type { IFieldConfig, IFieldValidation, IFormValues } from "./types";
 
-export const isFormValid = (formValues: IFormValues) => {
-  const allFieldsValid = registrationFields.every((fieldConfig) => {
-    const value = formValues[fieldConfig.label as keyof IFormValues];
-    const validation = validateField(fieldConfig, value, formValues, true);
-    return validation.isValid;
+export const createInitialValidationState = (fields: IFieldConfig[]) => {
+  const initialState: Record<string, IFieldValidation> = {};
+
+  fields.forEach((field) => {
+    initialState[field.name] = {
+      isValid: true,
+      message: "",
+      isDirty: false,
+    };
   });
 
-  return allFieldsValid;
+  return initialState;
 };
 
 export const validateField = (
@@ -62,4 +66,14 @@ export const validateField = (
   }
 
   return { isValid, message, isDirty };
+};
+
+export const isFormValid = (formValues: IFormValues) => {
+  const allFieldsValid = registrationFields.every((fieldConfig) => {
+    const value = formValues[fieldConfig.label as keyof IFormValues];
+    const validation = validateField(fieldConfig, value, formValues, true);
+    return validation.isValid;
+  });
+
+  return allFieldsValid;
 };

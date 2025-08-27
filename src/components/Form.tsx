@@ -3,7 +3,11 @@ import SubmitButton from "./SubmitButton";
 import type { IFieldConfig, IFieldValidation, IFormValues } from "../types";
 import { useCallback, useState } from "react";
 import { registrationFields } from "../registrationFields";
-import { isFormValid, validateField } from "../validation";
+import {
+  createInitialValidationState,
+  isFormValid,
+  validateField,
+} from "../validation";
 
 interface FormProps {
   inputFields: IFieldConfig[];
@@ -20,17 +24,7 @@ function Form({ inputFields }: FormProps) {
 
   const [validationState, setValidationState] = useState<
     Record<string, IFieldValidation>
-  >(() => {
-    const initialState: Record<string, IFieldValidation> = {};
-    registrationFields.forEach((field) => {
-      initialState[field.name] = {
-        isValid: true,
-        message: "",
-        isDirty: false,
-      };
-    });
-    return initialState;
-  });
+  >(() => createInitialValidationState(registrationFields));
 
   const handleOnChangeField = useCallback(
     (fieldName: keyof IFormValues, value: string) => {
@@ -47,6 +41,7 @@ function Form({ inputFields }: FormProps) {
           message: "",
           isDirty: false,
         };
+
         const validation = validateField(
           fieldConfig,
           value,
