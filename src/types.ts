@@ -1,6 +1,11 @@
 export interface IFieldConfig {
   label: string;
   type: "text" | "email";
-  placehoder: string;
+  placeholder: string;
   autocomplete: string;
+  minLength: number;
+  maxLength: number;
+  pattern: string;
+  patternMessage: string;
+}
 }

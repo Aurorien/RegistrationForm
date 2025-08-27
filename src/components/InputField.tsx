@@ -4,7 +4,15 @@ interface InputFieldProps {
   fieldConfig: IFieldConfig;
 }
 
-function InputField({ fieldConfig }: InputFieldProps) {
+  const {
+    label,
+    type,
+    placeholder,
+    autocomplete,
+    minLength,
+    maxLength,
+    pattern,
+  } = fieldConfig;
   return (
     <label>
       {fieldConfig.label}
