@@ -70,7 +70,7 @@ export const validateField = (
 
 export const isFormValid = (formValues: IFormValues) => {
   const allFieldsValid = registrationFields.every((fieldConfig) => {
-    const value = formValues[fieldConfig.label as keyof IFormValues];
+    const value = formValues[fieldConfig.name as keyof IFormValues];
 
     if (fieldConfig.required && value && value.trim().length === 0) {
       console.log(`${fieldConfig.label} is empty and required`);
