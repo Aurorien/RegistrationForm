@@ -1,0 +1,19 @@
+.success-content-ctn {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-content {
+  color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.back-button {
+  color: var(--secondary-color);
+  background-color: rgb(27, 27, 98);
+}

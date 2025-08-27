@@ -9,23 +9,28 @@ import {
   validateField,
 } from "../validation";
 import "./Form.css";
+import RegistrationSuccess from "./RegistrationSuccess";
+
+const initialFormValues: IFormValues = {
+  name: "",
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 interface FormProps {
   inputFields: IFieldConfig[];
+  onSuccess: (success: boolean) => void;
 }
 
-function Form({ inputFields }: FormProps) {
-  const [formValues, setFormValues] = useState<IFormValues>({
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+function Form({ inputFields, onSuccess }: FormProps) {
+  const [formValues, setFormValues] = useState<IFormValues>(initialFormValues);
 
   const [validationState, setValidationState] = useState<
     Record<string, IFieldValidation>
   >(() => createInitialValidationState(registrationFields));
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleOnChangeField = useCallback(
     (fieldName: keyof IFormValues, value: string) => {
@@ -108,8 +113,21 @@ function Form({ inputFields }: FormProps) {
       };
 
       console.log("Registration Data:", registrationData);
+
+      setIsSubmitted(true);
+      onSuccess(true);
     }
   };
+
+  const handleBackToRegistration = () => {
+    setIsSubmitted(false);
+    onSuccess(false);
+    setFormValues(initialFormValues);
+    setValidationState(createInitialValidationState(registrationFields));
+  };
+
+  if (isSubmitted)
+    return <RegistrationSuccess onClick={handleBackToRegistration} />;
 
   return (
     <form className="form" onSubmit={(event) => handleSubmit(event)}>
