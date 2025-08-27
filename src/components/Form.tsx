@@ -91,7 +91,6 @@ function Form({ inputFields }: FormProps) {
       };
 
       console.log("Registration Data:", registrationData);
-      alert("Registration successful! Check the console for the data.");
     }
   };
 
