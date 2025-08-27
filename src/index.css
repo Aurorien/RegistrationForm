@@ -1,18 +1,18 @@
 :root {
   --main-color: #004c91;
-  --seccondary-color: #ffffff;
+  --secondary-color: #ffffff;
   --accent-color: #008000;
 }
 
 body {
   background-color: var(--main-color);
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
+  width: 100%;
   min-height: 100vh;
 }
 
-.form {
-  background-color: var(--seccondary-color);
+h1 {
+  font-size: 1.7rem;
+  color: var(--secondary-color);
 }

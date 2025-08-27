@@ -1,4 +1,5 @@
 import type { IFieldConfig, IFieldValidation, IFormValues } from "../types";
+import "./InputField.css";
 
 interface InputFieldProps {
   fieldConfig: IFieldConfig;
@@ -30,8 +31,13 @@ function InputField({
 
   return (
     <>
-      <label>
-        {label}
+      <label className="input-field">
+        <span>
+          {label}
+          {(!isValid || isDirty) && (
+            <span className="validation error-icon">✗</span>
+          )}
+        </span>
         <input
           type={type}
           placeholder={placeholder}
@@ -45,16 +51,12 @@ function InputField({
           pattern={pattern}
           required={required}
         />
-        {(!isValid || isDirty) && (
-          <span className="validation error-icon">✗</span>
-        )}
-      </label>
-
-      {!isValid && validationMessage && (
-        <div>
-          <span className="validation message">{validationMessage}</span>
+        <div className="validation message-ctn">
+          {!isValid && validationMessage && (
+            <span className="validation message">{validationMessage}</span>
+          )}
         </div>
-      )}
+      </label>
     </>
   );
 }

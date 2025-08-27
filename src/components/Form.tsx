@@ -8,6 +8,7 @@ import {
   isFormValid,
   validateField,
 } from "../validation";
+import "./Form.css";
 
 interface FormProps {
   inputFields: IFieldConfig[];

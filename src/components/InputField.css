@@ -1,0 +1,27 @@
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  box-sizing: border-box;
+}
+
+.validation.error-icon {
+  padding-left: 4px;
+  color: red;
+}
+
+.validation.message-ctn {
+  height: 0.6rem;
+}
+
+.validation.message {
+  font-size: 0.8rem;
+  color: rgb(178, 9, 9);
+}
