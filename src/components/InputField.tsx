@@ -2,8 +2,11 @@ import type { IFieldConfig } from "../types";
 
 interface InputFieldProps {
   fieldConfig: IFieldConfig;
+  value: string;
+  onChange: (value: string) => void;
 }
 
+function InputField({ fieldConfig, value, onChange }: InputFieldProps) {
   const {
     label,
     type,
@@ -13,14 +16,20 @@ interface InputFieldProps {
     maxLength,
     pattern,
   } = fieldConfig;
+  console.log("value", value);
   return (
     <label>
-      {fieldConfig.label}
+      {label}
       <input
-        type={fieldConfig.type}
-        placeholder={fieldConfig.label}
-        name={fieldConfig.label}
-        autoComplete={fieldConfig.autocomplete}
+        type={type}
+        placeholder={placeholder}
+        name={label}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        autoComplete={autocomplete}
+        minLength={minLength}
+        maxLength={maxLength}
+        pattern={pattern}
         required
       />
     </label>
