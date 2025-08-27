@@ -1,7 +1,7 @@
 import InputField from "./InputField";
 import SubmitButton from "./SubmitButton";
 import type { IFieldConfig, IFieldValidation, IFormValues } from "../types";
-import { useCallback, useState } from "react";
+import { useCallback, useState, type FormEvent } from "react";
 import { registrationFields } from "../registrationFields";
 import {
   createInitialValidationState,
@@ -35,6 +35,26 @@ function Form({ inputFields }: FormProps) {
       const fieldConfig = registrationFields.find(
         (field) => field.name === fieldName
       );
+
+      if (fieldName === "password") {
+        const confirmPasswordFieldConfig = registrationFields.find(
+          (field) => field.name === "confirmPassword"
+        );
+        if (
+          validationState["confirmPassword"].isDirty &&
+          confirmPasswordFieldConfig &&
+          value !== formValues.confirmPassword
+        ) {
+          setValidationState((prev) => ({
+            ...prev,
+            [confirmPasswordFieldConfig.name]: {
+              isValid: false,
+              message: "Passwords do not match",
+              isDirty: true,
+            },
+          }));
+        }
+      }
 
       if (fieldConfig) {
         const currentValidation = validationState[fieldName] || {
