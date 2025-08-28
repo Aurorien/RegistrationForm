@@ -7,6 +7,5 @@ export default defineConfig({
   base: process.env.NODE_ENV === "production" ? "/RegistrationForm/" : "/",
   build: {
     outDir: "dist",
-    assetsDir: "assets",
   },
 });
