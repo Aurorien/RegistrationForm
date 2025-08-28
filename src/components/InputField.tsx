@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { IFieldConfig, IFieldValidation, IFormValues } from "../types";
 import "./InputField.css";
 
@@ -28,6 +29,13 @@ function InputField({
 
   const { isValid, message: validationMessage, isDirty } = validation;
 
+  const [showPassword, setShowPassword] = useState(false);
+  const inputType = type === "password" && showPassword ? "text" : type;
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <label className="input-field">
@@ -37,18 +45,37 @@ function InputField({
             <span className="validation error-icon">✗</span>
           )}
         </span>
-        <input
-          type={type}
-          placeholder={placeholder}
-          name={label}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onBlur={(e) => onBlur(e.target.value as keyof IFormValues)}
-          autoComplete={autocomplete}
-          minLength={minLength}
-          maxLength={maxLength}
-          required={required}
-        />
+        <div className="input-wrapper">
+          <input
+            type={inputType}
+            placeholder={placeholder}
+            name={label}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            onBlur={(e) => onBlur(e.target.value as keyof IFormValues)}
+            autoComplete={autocomplete}
+            minLength={minLength}
+            maxLength={maxLength}
+            required={required}
+          />
+          {type === "password" && (
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={togglePasswordVisibility}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? (
+                <span className="material-symbols-outlined">
+                  visibility_off
+                </span>
+              ) : (
+                <span className="material-symbols-outlined">visibility</span>
+              )}
+            </button>
+          )}
+        </div>
+
         <div className="validation message-ctn">
           {!isValid && validationMessage && (
             <span className="validation message">{validationMessage}</span>

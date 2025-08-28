@@ -25,3 +25,19 @@
   font-size: 0.8rem;
   color: rgb(178, 9, 9);
 }
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0;
+  display: flex;
+  margin: 0.3rem 0.4rem 0 0.5rem;
+  padding: 0.2rem;
+  background: transparent;
+  border: none;
+}
