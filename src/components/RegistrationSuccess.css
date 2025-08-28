@@ -10,10 +10,11 @@
   color: var(--secondary-color);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.7rem;
 }
 
 .back-button {
   color: var(--secondary-color);
   background-color: rgb(27, 27, 98);
+  cursor: pointer;
 }

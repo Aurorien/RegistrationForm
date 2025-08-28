@@ -1,6 +1,7 @@
 .submit-button {
   background-color: var(--accent-color);
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .submit-button,
