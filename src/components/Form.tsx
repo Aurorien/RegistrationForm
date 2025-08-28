@@ -10,14 +10,7 @@ import {
 } from "../validation";
 import "./Form.css";
 import RegistrationSuccess from "./RegistrationSuccess";
-
-const initialFormValues: IFormValues = {
-  name: "",
-  username: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+import { initialFormValues } from "../constants";
 
 interface FormProps {
   inputFields: IFieldConfig[];
