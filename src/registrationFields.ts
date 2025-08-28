@@ -43,7 +43,7 @@ export const registrationFields: IFieldConfig[] = [
   {
     label: "Password",
     name: "password",
-    type: "text",
+    type: "password",
     placeholder: "Password",
     autocomplete: "new-password",
     minLength: 8,
@@ -57,7 +57,7 @@ export const registrationFields: IFieldConfig[] = [
   {
     label: "Confirm password",
     name: "confirmPassword",
-    type: "text",
+    type: "password",
     placeholder: "Confirm Password",
     autocomplete: "new-password",
     minLength: 1,

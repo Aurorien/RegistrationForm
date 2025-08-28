@@ -1,7 +1,7 @@
 export interface IFieldConfig {
   label: string;
   name: string;
-  type: "text" | "email";
+  type: "text" | "email" | "password";
   placeholder: string;
   autocomplete: string;
   minLength: number;
