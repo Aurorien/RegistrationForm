@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { IFieldConfig, IFieldValidation, IFormValues } from "../types";
 import "./InputField.css";
+import { Eye, EyeOff } from "lucide-react";
 
 interface InputFieldProps {
   fieldConfig: IFieldConfig;
@@ -66,11 +67,9 @@ function InputField({
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? (
-                <span className="material-symbols-outlined">
-                  visibility_off
-                </span>
+                <EyeOff className="password-eye-icon" />
               ) : (
-                <span className="material-symbols-outlined">visibility</span>
+                <Eye className="password-eye-icon" />
               )}
             </button>
           )}

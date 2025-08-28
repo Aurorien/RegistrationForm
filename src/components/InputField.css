@@ -41,3 +41,8 @@
   background: transparent;
   border: none;
 }
+
+.password-eye-icon {
+  height: 1.2rem;
+  cursor: pointer;
+}
